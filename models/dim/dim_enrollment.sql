@@ -1,0 +1,27 @@
+{{
+    config(
+        materialized = 'incremental',
+        unique_key = 'enrollment_key'
+    )
+}}
+
+
+
+select
+  distinct
+  {{ dbt_utils.generate_surrogate_key(['IS_ENROLLED','ATTAINED_CERTIFICATE','ENROLLMENT_METHOD','IS_ACTIVE','IS_DELETED'
+]) }} as ENROLLMENT_KEY,
+  IS_ENROLLED,ATTAINED_CERTIFICATE,ENROLLMENT_METHOD,IS_ACTIVE,IS_DELETED
+from {{ ref('src_combined') }}
+
+
+
+
+
+-- WITH ENROLLMENT AS (
+-- SELECT distinct  IS_ENROLLED,ATTAINED_CERTIFICATE,ENROLLMENT_METHOD,IS_ACTIVE,IS_DELETED
+-- FROM
+-- {{ref('src_combined')}}
+-- )
+-- SELECT *,ROW_NUMBER() OVER (ORDER BY IS_ENROLLED,ATTAINED_CERTIFICATE,ENROLLMENT_METHOD,IS_ACTIVE,IS_DELETED) ENROLLMENT_KEY
+-- FROM ENROLLMENT

@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: SUDHANSHU
+    schema: RAW
+    tables:
+      - name: LEARNING
+        identifier: learning_n
+      - name: ACTIVE_EMPLOYEES
+        identifier: active_employees
+
+      - name: INCREMENTAL
+        identifier: incremental
+
+      - name: TESTA
+        identifier: TESTA
+
+      - name: CONTROL_TABLE
+        identifier: CONTROL_TABLE
