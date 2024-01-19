@@ -1,10 +1,8 @@
 
 {{
     config(
-        materialized='incremental',
-        unique_key = 'enrollment_id',
-        merge_exclude_columns =  ['CREATED_AT'],
-        full_refresh = False
+        materialized='ephemeral',
+        full_refresh = false
     )
 }}
 
@@ -30,7 +28,6 @@ SELECT
     NVL(ENROLLMENT_METHOD,'NA') AS ENROLLMENT_METHOD,
     NVL(IS_ENROLLED,'NA') AS IS_ENROLLED,
     LANGUAGE,
-    LAST_LOGGEDIN,
     PROGRESS,
     SCORE,
     CASE
